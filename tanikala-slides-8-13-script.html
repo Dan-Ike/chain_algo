@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TANIKALA: Slides 8 and 13 Script (Corrected)</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d22;--muted:#5d5d68;--accent:#8a4b12;--card:#f1ede4;--line:#d9d2c3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17171b;--fg:#ececf0;--muted:#a3a3b0;--accent:#e6b072;--card:#222228;--line:#383842}}
+:root[data-theme="dark"]{--bg:#17171b;--fg:#ececf0;--muted:#a3a3b0;--accent:#e6b072;--card:#222228;--line:#383842}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Georgia,"Times New Roman",serif}
+main{max-width:780px;margin:0 auto;padding:24px 18px 60px}
+h1{font-size:1.7rem;line-height:1.25;margin:.2em 0}
+h2{font-size:1.3rem;margin:2em 0 .4em;padding-bottom:.2em;border-bottom:2px solid var(--accent);color:var(--accent)}
+h3{font-size:1.05rem;margin:1.4em 0 .3em}
+p,li{margin:.4em 0}
+.sub{color:var(--muted);margin:0 0 1em}
+.say{background:var(--card);border-left:4px solid var(--accent);padding:.5em .9em;margin:.6em 0;border-radius:4px}
+.note{border:1px solid var(--line);padding:.5em .9em;border-radius:4px;color:var(--muted);font-size:.95rem}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:520px}
+th,td{border:1px solid var(--line);padding:.35em .6em;text-align:left;vertical-align:top}
+th{background:var(--card)}
+.summary{margin-top:2.5em}
+.summary li{margin:.25em 0}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  .summary{page-break-before:always;margin-top:0}
+  h2{page-break-after:avoid}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>TANIKALA: Slides 8 and 13 Script</h1>
+<p class="sub">Corrected version. Text in [brackets] is a cue or something to fill in. The summary is on the last page.</p>
+<p class="note">Timing: read in full, slide 8 takes about 3 to 4 minutes and slide 13 about 5 to 6. Trim the algorithm steps to a few sentences each to fit your slot. Slide 11 covers the same algorithms, so agree with whoever presents it on who explains what.</p>
+
+<h2>Shortest Script (Defense Flow, About 3 Minutes)</h2>
+<p class="note">Flow: slide 8, then slide 13, then the calibration panel, then the algorithms. Only the important parts.</p>
+<h3>1. Slide 8: System Features (about 30 seconds)</h3>
+<div class="say">"These are TANIKALA's system features, tied to Objective 6. Four players are chained in a line, with an 18-stud limit on the outer links and 8 on the middle. If you pull away, you slow down. One death respawns everyone and costs 40 seconds. Players solve cooperative puzzles across three portals of Philippine history."</div>
+<h3>2. Slide 13: Progress (about 30 seconds)</h3>
+<div class="say">"Implemented: the chain runs end to end in a four-player session, with the speed penalty, the separation limit and a live metrics panel. In development: [your items] and tuning the boss. Proposed: the pre-test and post-test and the full performance testing."</div>
+<h3>3. Calibration Panel (about 30 seconds)</h3>
+<div class="say">"This panel is our Objective 5 evidence. [Open it.] The server computes every number and the panel only displays it. It tracks constraint solving and solver cost against the 16.6 millisecond budget, link tension, the boss's prediction error, latency and frame time. Green means within the current threshold, and some thresholds are still being tuned."</div>
+<h3>4. The Algorithms (about 1.5 minutes)</h3>
+<div class="say"><b>Verlet and constraint passes.</b> "Every one-thirtieth of a second, Verlet integration moves each rope point from its previous motion plus gravity, with the ends pinned to the players. Then 20 constraint passes pull each segment back to 1.5 studs, because fixing one segment disturbs its neighbor."</div>
+<div class="say"><b>MACO.</b> "MACO is a rule-based speed penalty, not a cost-minimizing optimizer. When a link is past 65% stretch and another link is also taut, the player pulling away slows, down to 25% of normal speed. Players moving toward a neighbor are never slowed. Each player's device enforces the hard limit."</div>
+<div class="say"><b>Predictive AI.</b> "The boss predicts where the player will be: position plus velocity times a lookahead of 0.15 to 1.5 seconds, then paths to that point. It must lead because it moves at 17 and players at 32 or 48. We check each prediction against the real position, and within 10 studs counts as accurate."</div>
+
+<h2>Longer Short Script (Optional)</h2>
+<p class="note">About 1 minute for slide 8 and about 1.5 minutes for slide 13 at a normal pace. The full scripts below are for reference and practice.</p>
+<h3>Slide 8: System Features (about 1 minute)</h3>
+<div class="say">"Good day, panel. These are TANIKALA's system features, each tied to Objective 6. First, chained movement (6a): four players linked in a line, A to B to C to D. The outer players can separate up to 18 studs and the middle pair 8, and if you pull away on a stretched link you slow down. That is our MACO rule. Second, four-player online sessions (6b): the server simulates the chain 30 times a second and sends it to everyone. Third, shared failure (6c): one death respawns all four and takes 40 seconds off the 30-minute timer. Fourth, the Book (6d) lists tasks and shows progress. Finally, cooperative puzzles with three zones per portal (6f), set across three periods of Philippine history (6g): Pre-colonial, Spanish colonial and the Revolution. Together, that is linked movement, enforced group rules and cooperative puzzles in Philippine history."</div>
+<h3>Slide 13: Prototype / System Progress (about 1.5 minutes)</h3>
+<div class="say">"This slide shows our progress in three stages. <b>Implemented:</b> the chain already runs end to end in a four-player session. Every one-thirtieth of a second, the server moves the rope with Verlet integration, settles it with 20 constraint passes, and applies MACO, a rule-based speed penalty. When a link is past 65% stretch and another link is also taut, the player pulling away slows down, to a floor of 25% of normal speed. Each player's device enforces the separation limit. We also built a live metrics panel for Objective 5. [Open the panel.] It shows constraint solving, link tension, the boss's prediction, latency and frame time. <b>In development:</b> [your items], and tuning the predictive boss. <b>Proposed:</b> the in-game pre-test and post-test, and the full ISO/IEC 25010 performance testing. The core mechanic is already running and measurable, and the remaining work is content and evaluation."</div>
+<h3>If You Must Cut Further (about 20 seconds each)</h3>
+<div class="say"><b>Slide 8:</b> "Our features are chained four-player movement with a speed penalty for pulling, shared failure, task tracking, and cooperative puzzles across three periods of Philippine history."</div>
+<div class="say"><b>Slide 13:</b> "The chain, the speed penalty and the metrics panel already run. We are still building the remaining portals and tuning the boss. The pre-test, post-test and full performance testing are next."</div>
+
+<h2>1. Slide 8: System Features (Full Script)</h2>
+<div class="say"><b>Opening.</b> "Good day, panel. I'll present the system features of TANIKALA. Each box maps to Objective 6, the design and development objective, and the objective code is shown under each feature."</div>
+<div class="say"><b>Chained Co-op Movement (6a).</b> "The core feature is chained movement. Four players are linked in a fixed line, A to B to C to D. Each link is a rope of 13 points joined by 12 segments of 1.5 studs, 18 studs in all. Players can separate by at most 18 studs on the two outer links and 8 studs on the middle link. If a player pulls away on a stretched link, that player slows down. This is our Multi-Agent Constraint Optimization rule, and I'll explain it when I show the prototype. The chain is simulated by our own Luau code, not Roblox's built-in rope, so we control exactly how it behaves."</div>
+<div class="say"><b>4-Player Online Sessions (6b).</b> "The game runs as an online session of exactly four players. The server simulates the chain 30 times a second and sends the result to all four players. Each client draws the chain and smooths between updates, so everyone sees the same chain state."</div>
+<div class="say"><b>Shared Failure (6c).</b> "If one player dies, all four respawn together and 40 seconds are deducted from the shared 30-minute timer, 10 seconds per player. The group loses when the timer reaches zero. Reaching the escape portal in time is an escape. Reaching the clear portal in time without any death is a clear, the full win."</div>
+<div class="say"><b>Progress Tracking (6d).</b> "Players have an ability called Book. It lists the group's tasks, marks finished ones, and shows overall progress."</div>
+<div class="say"><b>Abilities.</b> "Sprint raises speed and reduces the drag penalty on a stretched chain. [Mention Double Jump only if it is in your current build.] Pull sends a request to the other three players. They have 3 seconds to accept, and if all accept they are brought to the puller. It has a 5-second cooldown."</div>
+<div class="say"><b>Puzzles (6f) and Portals (6g).</b> "The levels are cooperative puzzles and platforming, with three zones per portal. The chain keeps everyone close, so the puzzles need all four players. The features come together across three periods of Philippine history: the Pre-colonial period in <i>Alamat ng Pinagmulan</i>, the Spanish colonial period in <i>Ang Krus at Kadena</i>, and the Revolution in <i>Sigaw ng Paglaya</i>, all based on documented sources."</div>
+<div class="say"><b>Closing.</b> "In short, the system combines physically linked movement, enforced group rules and cooperative puzzles, set in Philippine history."</div>
+
+<h2>2. Slide 13: Initial Prototype / System Progress (Full Script)</h2>
+<div class="say"><b>Opening.</b> "This slide shows where the prototype stands. We separate it into what is implemented, what is in development, and what is only proposed."</div>
+<div class="say"><b>Implemented.</b> "The chain already runs end to end in a four-player session. [Point to the chain screenshot.] Every one-thirtieth of a second the server runs three steps, and then the players' devices handle a fourth."</div>
+<div class="say"><b>Step 1, Verlet integration.</b> "Each rope point moves based on its own previous motion plus gravity, with damping of 0.97. A raycast stops points from passing through walls, and the two end points are pinned to the players. Verlet needs no stored velocity and stays stable."</div>
+<div class="say"><b>Step 2, Iterative Constraint Satisfaction.</b> "We run 20 passes over the segments. Each pass measures every neighboring pair and moves both points toward 1.5 studs apart. Fixing one segment disturbs its neighbors, so repeated passes settle the whole rope."</div>
+<div class="say"><b>Step 3, Multi-Agent Constraint Optimization.</b> "This is a rule-based speed penalty. When a link is stretched past 65% of its limit, and at least one more link behind it is also taut, the player moving away from their neighbor is slowed. The more stretched the link and the more taut links behind, the bigger the slowdown, down to a floor of 25% of normal speed. Sprinting cuts the cost. Players moving toward a neighbor are never slowed, so they can always catch up. The name comes from multi-agent constraint optimization research, but we use it as a simple rule and don't minimize a cost function."</div>
+<div class="say"><b>Step 4, replicate, render and enforce.</b> "The server sends the chain to all clients, which smooth between updates. When the rope is slack, below 85% stretch, the drawn chain blends toward a straight line to hide small jitter. The separation limit is enforced on each player's device. In the last 3 studs it gradually reduces outward speed, and past the limit it gently nudges the player back. We do this on the client because Roblox lets each client control its own character."</div>
+<div class="say"><b>Calibration Metrics HUD (live demo).</b> "We also built a live Calibration Metrics panel. [Open it with the top-right button.] It is display only. The server computes every number and the panel shows it. Section 1 is Verlet and constraint solving: constraint error, passes used out of 20, and solver cost against our 16.6 millisecond budget. Section 2 is the speed penalty: tension on each link, how unevenly stress is spread, and near-failure events. Section 3 is shared failure. Section 4 is predictive pathfinding: how close the boss's prediction is to the player's actual position. Section 5 is the gap between server and client positions. Section 6 is per-player latency, Good at 100 milliseconds or less and Fair at 200 or less. Section 7 is system debug: session restarts, Pull health and frame time. Green means within our current threshold. This panel is how we collect the Objective 5 measurements during testing, and some thresholds are still being tuned."</div>
+<div class="say"><b>In Development.</b> "In the middle is what we are still building and debugging. [Point to the WIP screenshot. List your actual items, for example the remaining puzzles and NPC dialogue in the Spanish colonial and Revolution portals.] We are also tuning the predictive boss. The panel shows its predicted position next to the player's actual position."</div>
+<div class="say"><b>Proposed.</b> "On the right is what is planned but not yet built. [For example: the in-game pre-test and post-test for memory and generalization, and the full Performance Efficiency testing under ISO/IEC 25010:2023.]"</div>
+<div class="say"><b>Closing.</b> "The core mechanic is already running and measurable, and the remaining work is content and evaluation. Thank you. We're happy to take your questions."</div>
+
+<h2>3. Explanations Behind the Script</h2>
+<h3>Chain algorithm: detailed explanation</h3>
+<p><b>The problem.</b> Four players must feel physically tied together: they can't wander off, a puller drags the others, and it has to be cheap and stable for a multiplayer server. Three pieces split the job. <b>Verlet</b> moves the rope, <b>Iterative Constraint Satisfaction</b> keeps its segments the right length, and <b>MACO</b> decides who slows down when the rope is stretched. A fourth piece, the <b>client limit</b>, is the hard stop on separation.</p>
+<p><b>Settings (ChainConfig).</b> 12 segments (13 points) per link, 18 studs total, so 1.5 studs per segment. 20 constraint passes, gravity −80, damping 0.97, point radius 0.35, 30 updates per second, replicated every update.</p>
+<p><b>Each update, on the server.</b> The loop collects time into a fixed 1/30 s step (a single frame's time is capped at 0.1 s, so a lag spike can't blow up the physics). For each of the 3 links it runs Verlet and then the 20 passes. After all links it runs MACO, then sends the rope points to every client. The whole thing is timed for the 16.6 ms budget.</p>
+<p><b>Verlet, in detail.</b> Each interior point keeps only its current and previous position. Its velocity is implied by the difference, so <code>new = pos + (pos − prev) × 0.97 + gravity × dt²</code>. Damping at 0.97 bleeds a little energy each step so the rope settles instead of swinging forever. Gravity is −80, stronger than Roblox's default, so the rope hangs convincingly. Before a point moves, a raycast checks the path. If it would pass through a wall, the point is placed on the surface, pushed out by its 0.35 radius. The two end points are not simulated. They are pinned to the players' real positions every update. <i>Why Verlet:</i> no stored velocity to go unstable, simple, and cheap enough for 36 moving points at 30 Hz.</p>
+<p><b>Iterative Constraint Satisfaction, in detail.</b> After Verlet moves the points, segments are the wrong length. A pass looks at each neighboring pair, measures the gap, and moves both points halfway toward 1.5 studs apart (the pinned end points stay put). Example: a gap of 2.5 has an error of 1.0, so each point moves 0.5 and the gap becomes 1.5. Moving one pair disturbs the next pair, so one pass is not enough. Repeating 20 times lets the corrections spread along the rope until it settles. More passes make the rope stiffer but cost more time, so 20 is a balance against the 16.6 ms budget. The ends are re-pinned after every pass.</p>
+<p><b>MACO, in detail.</b> For each link, the server takes the distance between the two real players and the link's limit (18, or 8 for the middle link in a four-player chain). Slowing can only start when the link is past 65% of its limit. Progress is <code>t = (distance − 0.65 × limit) / (0.35 × limit)</code>, from 0 to 1. Two more conditions must hold. First, the player must be moving away from the neighbor (the dot product of their move direction with the link direction beyond 0.2). Second, at least one more link behind them must also be taut, because the slowdown counts how many players they are dragging. Then <code>penalty = tautLinks × 0.55 × t</code> and <code>speed = base × (1 − penalty)</code>, never below 25% of base (8 when walking, 12 when sprinting). Sprinting multiplies the 0.55 cost by 0.35. Players moving toward a neighbor are never slowed. Examples with the outer link at 14.4 studs (t = 0.43): one taut link behind gives 32 → about 24.5; two give 32 → about 16.9; a sprinter with one taut link behind goes 48 → about 44. <i>Why this design:</i> the player who pulls pays, everyone else can always catch up, and the slowdown grows smoothly with no sudden stop.</p>
+<p><b>Client limit, in detail.</b> Roblox lets each client control its own character, so the hard stop has to run on the device. Within the last 3 studs of the limit, each frame removes 12% of the outward speed, scaled by how deep in the zone the player is. If the player is past the limit by more than 0.3 studs, they are nudged back by 20% of the overshoot, after a wall check so they aren't pushed into geometry. It switches off while a Pull is happening.</p>
+<p><b>Rendering.</b> Clients interpolate between server updates. The drawn rope's end points always follow the real players, and each link piece is stretched to the live gap with a 25% overlap to hide seams. Below 85% stretch, the drawn rope is blended toward a straight line to hide Verlet wiggle. Close to taut, you see the real simulated shape.</p>
+<p><b>Honest trade-off.</b> The server owns the rope and the speed penalty, but the final stop on separation is client-side. That is fine for a research prototype with four cooperative testers, and the thesis already documents it.</p>
+<h3>Chain algorithm: short version</h3>
+<ul>
+<li><b>Verlet:</b> <code>new = pos + (pos − prev) × 0.97 + gravity × dt²</code>. Ends pinned to players. Cheap and stable at 30 Hz.</li>
+<li><b>Iterative Constraint Satisfaction:</b> 20 passes. Example: two points 2.5 apart have an error of 1.0, so each moves 0.5 and they end at 1.5.</li>
+<li><b>MACO:</b> <code>t = (stretch − 0.65 × limit) / (0.35 × limit)</code>. If the player moves away and at least one more link is taut, <code>penalty = tautLinks × 0.55 × t</code>, speed = <code>base × (1 − penalty)</code>, floor 25%. Example: outer link at 14.4 studs gives t = 0.43. With one more taut link, walking 32 becomes about 24.5, and sprinting 48 becomes about 44.</li>
+<li><b>Client limit:</b> last 3 studs bleed 12% of outward speed per frame, scaled by depth. Past the limit by 0.3 studs, a nudge of 20% of the overshoot, with a wall check.</li>
+</ul>
+<h3>Calibration Metrics overlay: detailed explanation</h3>
+<p><b>What it is and why it exists.</b> A display-only panel (top-right "Calibration Metrics" button). Objective 5 requires calibrating and verifying the algorithms with measured values, and this panel shows them live. Four server scripts feed it: ChainMetricsService (5 times a second), LatencyMonitor, ChainManager's debug feed (once a second) and SnakeBossServer (4 times a second). The client computes nothing except reporting its own position.</p>
+<p><b>① Verlet / ICS.</b> <i>Shows:</i> constraint error ε (current, average, max), passes used out of 20, peak-load ε, timestep drift at 30/60/120 fps, solver cost in µs. <i>Why:</i> proves the rope stays near its set length and fits the time budget. <i>Answers:</i> Constraint Error, Per-Update Computation Time, TC-01, TC-02. <i>Thresholds:</i> convergence means a pass got segment error under 25%, solver cost passes under 16,600 µs. <i>Caution:</i> ε is measured per 1.5-stud segment, not per whole link as the thesis defines it, so call it a calibration reading.</p>
+<p><b>② MACO.</b> <i>Shows:</i> tension per link, stress spread, near-failure events (a link at 90% or more of its limit, so 16.2 studs on an outer link), time to stabilize. <i>Why:</i> shows how stretched the chain gets and how evenly. <i>Answers:</i> TC-03. <i>Caution:</i> the 8-stud middle link can never reach 16.2, so it never counts an event, the spread is in raw studs, and the "MACO off" counter stays at zero because nothing switches MACO off yet.</p>
+<p><b>③ Shared failure.</b> <i>Shows:</i> propagation latency, false positives and negatives. <i>Answers:</i> TC-04. <i>Caution:</i> these only update if ChainDeathManager calls the recording functions, which I haven't seen, so check it before showing this section.</p>
+<p><b>④ Predictive Pathfinding.</b> <i>Shows:</i> prediction accuracy (within 10 studs), interception rate, boss state, lookahead, the last prediction error. <i>Why:</i> measures how good the boss's forecast is. In the world, a yellow ball marks the prediction and a white ball marks the player's real position. <i>Answers:</i> Trajectory Prediction Error, TC-06.</p>
+<p><b>⑤ Network.</b> <i>Shows:</i> the distance in studs between the server's position and the client's reported position. <i>Why:</i> shows how well the game stays in sync.</p>
+<p><b>⑥ Latency.</b> <i>Shows:</i> ping per player rated Good (100 ms or less), Fair (200 ms or less) or Poor, round trip time, and a warning when one player's connection is much worse than the rest. <i>Why:</i> a laggy player may see delayed speed corrections. <i>Answers:</i> Network Latency.</p>
+<p><b>⑦ System debug.</b> <i>Shows:</i> session state and restarts, Pull requests (accepted, declined, timed out, average accept time), total frame time vs solver-only time as a share of 16.6 ms, chain topology, and a collision-group check. <i>Why:</i> shows whether a frame drop is the algorithm's fault or something else in the same update. <i>Answers:</i> Time Behaviour, Resource Utilization, Capacity.</p>
+<p><b>Reading it live.</b> Green [PASS] means within the current threshold. Frame rate is not here, because the thesis takes it from Roblox's built-in statistics.</p>
+<h3>Calibration Metrics overlay: short version</h3>
+<div class="wrap"><table>
+<tr><th>Section</th><th>Shows</th><th>Answers</th></tr>
+<tr><td>① Verlet / ICS</td><td>ε, passes used, solver cost vs 16,600 µs</td><td>Constraint Error, Per-Update Time, TC-01, TC-02</td></tr>
+<tr><td>② MACO</td><td>link tension, stress spread, near-failure events</td><td>TC-03</td></tr>
+<tr><td>③ Shared failure</td><td>propagation latency, false positives and negatives</td><td>TC-04</td></tr>
+<tr><td>④ Predictive</td><td>accuracy, interception, boss state and error</td><td>Trajectory Prediction Error, TC-06</td></tr>
+<tr><td>⑤ Network</td><td>server-client gap in studs</td><td>non-functional tests</td></tr>
+<tr><td>⑥ Latency</td><td>ping per player, Good / Fair / Poor</td><td>Network Latency</td></tr>
+<tr><td>⑦ System debug</td><td>restarts, Pull health, frame time</td><td>Time Behaviour, Resource Utilization, Capacity</td></tr>
+</table></div>
+<p>Display only. The server sends a snapshot 5 times a second. The client sends its position back so the server can measure the gap. Frame rate is not in the overlay, because the thesis reads it from Roblox's built-in statistics.</p>
+<h3>Snake Boss predictive AI</h3>
+<ul>
+<li>Smooths each player's velocity, then picks the nearest living player within 95 studs (switches only if another is 15 studs nearer).</li>
+<li><code>lookahead = distance / 17</code>, clamped to 0.15–1.5 s, so the cap is reached at about 26 studs. <code>predicted = position + velocity × lookahead</code>. Example: 10 studs away gives 0.59 s.</li>
+<li>Pathfinding goes to the forecast, replanning at most every 0.4 s. Attacks need the target and forecast within 30 studs, a 2 s cooldown, and aim locks 0.25 s early so it can be dodged.</li>
+<li>Every 0.2 s it stores a prediction and later checks it against the real position (within 10 studs counts as accurate). Every attack counts as an interception attempt.</li>
+<li>Why: the boss moves at 17 and players at 32 or 48, so it must lead the target. Beyond the thesis: it is a state machine tied to the altars (a lit altar stuns it 2 s, four lit kills it, a wrong totem order respawns it).</li>
+</ul>
+<h3>Puzzle Metrics panel</h3>
+<ul>
+<li>Read-only view (PUZZLE button or F4) of in-game logging: hint items found, Zone 1 totems (immediate recall), Zone 3 totems (delayed recall within the session), first-attempt correctness, attempts, time to solve, per-player clicks.</li>
+<li>Matches the thesis's supporting data: task completion time, error rates, puzzle attempts. It does not replace the Corsi and matrix reasoning pre-test and post-test.</li>
+<li>Reset metrics is open to every player, so don't press it during testing. I haven't verified how the chance-of-first-attempt figure is computed.</li>
+</ul>
+
+<h2>4. Likely Questions and Ready Answers</h2>
+<h3>Algorithm questions</h3>
+<p><b>Why Verlet instead of Roblox's rope or physics?</b> "Built-in ropes link two players and give us no control over the speed rule or measurement. Verlet is simple, stable, and cheap enough for four players at 30 updates a second, and we can measure every step."</p>
+<p><b>Why 20 passes?</b> "It is a balance between rope stiffness and the 16.6 millisecond time budget. We calibrate it with the solver cost and convergence readings." (Don't say it was mathematically derived.)</p>
+<p><b>Is MACO really optimization?</b> "No. It is a rule-based speed penalty. The name comes from the multi-agent constraint optimization field, and no cost function is minimized. The thesis states this."</p>
+<p><b>Why 65%, 0.55 and the 25% floor?</b> "They are tuned values from playtesting. Our limitations already say the chain relies on manual tuning, and the calibration metrics are how we check them."</p>
+<p><b>What if two players pull in opposite directions?</b> "Each one counts as a puller on their side, so each is slowed if more taut links are behind them. The limit is never broken, because the client stop still applies."</p>
+<p><b>Why is the limit enforced on the client? Can it be bypassed?</b> "Roblox clients control their own characters, so the stop has to run there. The server still simulates the rope, applies the penalty and measures. A modified client could bypass it in principle, which is an acceptable limitation for a research prototype with cooperative testers."</p>
+<p><b>How do you know the chain is stable?</b> "The panel reports constraint error, passes needed and solver cost, and the test cases TC-01 and TC-02 check the Verlet math by hand and the error after the passes."</p>
+<p><b>Why 30 updates and not 60?</b> "It keeps the server cost and network traffic low, and the clients smooth between updates. We measure the per-update cost against the 16.6 millisecond budget to confirm it fits."</p>
+<p><b>Why does the boss predict, and what are the limits?</b> "Players move at 32 to 48 and the boss at 17, so chasing the current position always lags. It projects the player's position forward by a lookahead of 0.15 to 1.5 seconds. It assumes steady movement, so sudden turns increase the error. We measure that error."</p>
+<h3>Paper questions</h3>
+<p><b>What is your research gap?</b> "No reviewed work combines chain constraints, a speed-penalty rule and predictive enemy AI in one Roblox game, or pairs them with a measured cognitive outcome."</p>
+<p><b>Why combine three algorithms?</b> "Each does a different job: Verlet moves the rope, Iterative Constraint Satisfaction keeps it within length, and MACO keeps pulling fair. Together they make four tethered players behave coherently."</p>
+<p><b>How will you measure cognitive change?</b> "A block-sequence task based on the Corsi Block Test for short-term memory, and a matrix reasoning task for generalization, taken before and after play with separate forms. Both are kept separate from the in-game puzzles."</p>
+<p><b>Why the Wilcoxon Signed-Rank test?</b> "It compares two related sets of scores, before and after, and does not assume a normal distribution, which suits a small sample. We use α = 0.05."</p>
+<p><b>How many participants?</b> "At least 32 players, in eight groups of four, because the game needs four players. One expert evaluator has been engaged so far."</p>
+<p><b>Can you claim the game improves memory without a control group?</b> "No. We claim only a measurable short-term change within the evaluation sessions. We do not claim long-term retention, intelligence or clinical effects, and we list that as a limitation."</p>
+<p><b>Why only Performance Efficiency from ISO/IEC 25010:2023?</b> "It covers Time Behaviour, Resource Utilization and Capacity, which match what a chained multiplayer game stresses most. Other characteristics are outside our scope."</p>
+<p><b>Why Roblox, adults 18+ and Metro Manila?</b> "Roblox provides multiplayer, PC and mobile play and Luau scripting, so effort goes into the chain and enemy systems. The 18+ and Metro Manila limits are our stated scope."</p>
+<p><b>How do you know the history content is accurate?</b> "The portals draw on documented sources reviewed in Chapter II, and a history professor from UMak is the expert evaluator."</p>
+<p><b>What is finished so far?</b> "The chain, the speed penalty, the client limit, Sprint, Pull and the calibration panel run today. Remaining work is content and evaluation." Adjust to your real status.</p>
+
+<h2>5. Cautions and Quick Answers</h2>
+<ul>
+<li><b>Constraint error:</b> the thesis defines it per whole link, but the code measures each 1.5-stud segment. Treat the number as a calibration reading and don't lead with it.</li>
+<li><b>Middle link:</b> its 8-stud limit means it never reaches the near-failure threshold, so it never counts a peak-stress event.</li>
+<li><b>Don't claim</b> a Stretch Reduction Rate percentage or that the predictive boss beats a reactive one. Say "those comparison runs are part of the testing phase."</li>
+<li><b>Demo setup:</b> use four players (the code allows 2 for testing), and skip the slingshot launch, which is not in the thesis.</li>
+<li><b>Why a chain?</b> No one moves alone, so the physics creates cooperation.</li>
+<li><b>Why not Roblox's rope?</b> It only links two players and gives no control over the speed rule or measurement.</li>
+<li><b>Is MACO optimization?</b> It is a rule-based speed penalty. The name is borrowed, and no cost function is minimized.</li>
+<li><b>A panel shows [FAIL]?</b> The metrics are for calibration and some thresholds are still being tuned.</li>
+</ul>
+
+<section class="summary">
+<h2>Summary (One Page)</h2>
+<h3>Chain</h3>
+<ul>
+<li>4 players, A-B-C-D. Limits: 18 outer, 8 middle.</li>
+<li>Rope: 13 points, 12 segments of 1.5 studs. Custom Luau, not Roblox rope.</li>
+<li>Server: 30 updates/s. Verlet, then 20 constraint passes, then MACO.</li>
+<li>Limit enforced on each client: bleed in the last 3 studs, nudge past the limit.</li>
+</ul>
+<h3>MACO</h3>
+<ul>
+<li>Rule-based speed penalty. No cost function.</li>
+<li>Needs a link past 65%, one more taut link behind, and the player moving away.</li>
+<li>Speed floor 25%. Sprint cuts the cost. Moving toward a neighbor is never slowed.</li>
+<li>Example: 32 becomes about 24.5, and sprint 48 becomes about 44.</li>
+</ul>
+<h3>Features (Slide 8)</h3>
+<ul>
+<li>Chained movement, 4-player sessions, shared failure (40 s off a 30-min timer), Book, puzzles, 3 portals.</li>
+<li>Pull: 3 s to accept, all must accept, 5 s cooldown. Sprint 32 to 48.</li>
+</ul>
+<h3>Metrics HUD</h3>
+<ul>
+<li>Display only. 7 sections. Evidence for Objective 5.</li>
+<li>Solver budget 16.6 ms. Latency Good at 100 ms or less, Fair at 200 ms or less.</li>
+<li>Frame rate comes from Roblox's built-in statistics, not the HUD.</li>
+</ul>
+<h3>Boss AI</h3>
+<ul>
+<li>Forecast = position + velocity × lookahead (0.15–1.5 s, cap at about 26 studs).</li>
+<li>Route by PathfindingService. Boss speed 17 vs players 32 or 48.</li>
+<li>Error checked every 0.2 s (within 10 studs counts). Attacks are logged hit or miss.</li>
+</ul>
+<h3>Puzzle panel</h3>
+<ul>
+<li>Time to solve, attempts, first attempt correct. Zone 1 immediate and Zone 3 delayed recall.</li>
+<li>Supporting data only. The Corsi and matrix tests are separate.</li>
+</ul>
+<h3>Quick answers to likely questions</h3>
+<ul>
+<li>Why Verlet? Cheap, stable, measurable. Why not Roblox rope? No control over the rule.</li>
+<li>20 passes: balance of stiffness and the 16.6 ms budget. Tuned values: from playtesting.</li>
+<li>MACO: a rule, not optimization. Limit on the client: Roblox clients own their characters.</li>
+<li>Boss predicts because it is slower. Weakness: sudden turns.</li>
+<li>Cognitive tests: Corsi-based and matrix reasoning, pre and post, Wilcoxon, α = 0.05, 32 or more players.</li>
+<li>No control group, so claim only short-term change, never long-term effects.</li>
+</ul>
+<h3>Safe to show</h3>
+<ul>
+<li>Solver cost, frame time, latency, session stability, boss prediction error and markers, puzzle timings.</li>
+</ul>
+<h3>Don't claim yet</h3>
+<ul>
+<li>Constraint Error as a final result, a Stretch Reduction Rate percentage, or predictive beating reactive.</li>
+</ul>
+<h3>Before presenting</h3>
+<ul>
+<li>Demo with 4 players. Don't press Reset metrics. Skip the slingshot. Fill in the [brackets].</li>
+</ul>
+</section>
+</main>
+</body>
+</html>
